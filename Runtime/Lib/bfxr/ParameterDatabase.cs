@@ -22,7 +22,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Wikman.Synthesizer.Sfxr
+namespace com.unitycoder.sfxr
 {
 	internal enum ParameterType
 	{

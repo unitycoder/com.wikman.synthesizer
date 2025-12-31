@@ -6,11 +6,11 @@ using UnityEngine;
 
 using Object = UnityEngine.Object;
 
-namespace Wikman.Synthesizer.Editor
+namespace com.unitycoder.sfxr.Editor
 {
     internal static class ResourceLoader
     {
-        const string k_ResourcePath = "Packages/com.wikman.synthesizer/Editor/UI";
+        const string k_ResourcePath = "Packages/com.unitycoder.sfxr/Editor/UI";
 
         internal static T Load<T>(string path) where T : Object
         {

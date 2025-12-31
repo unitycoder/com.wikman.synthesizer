@@ -1,4 +1,4 @@
-namespace Wikman.Synthesizer.Editor
+namespace com.unitycoder.sfxr.Editor
 {
     internal static class TemplateDefaults
     {

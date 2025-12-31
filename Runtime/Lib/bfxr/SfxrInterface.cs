@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Wikman.Synthesizer.Sfxr
+namespace com.unitycoder.sfxr
 {
 	internal class SfxrInterface
 	{

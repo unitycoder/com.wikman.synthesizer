@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace Wikman.Synthesizer.Sfxr
+namespace com.unitycoder.sfxr
 {
     internal static class TemplateEffects
     {

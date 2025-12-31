@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Wikman.Synthesizer
+namespace com.unitycoder.sfxr
 {
     public class EffectParameters
     {

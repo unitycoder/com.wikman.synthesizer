@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Wikman.Synthesizer.Editor
+namespace com.unitycoder.sfxr.Editor
 {
     public class SynthEditor : EditorWindow
     {
@@ -19,7 +19,7 @@ namespace Wikman.Synthesizer.Editor
             "Whistle",
             "Breaker",
         };
-        
+
         ClipData m_LatestClip;
         bool m_ShouldRandomize = false;
         int m_WaveTypeIndex;
@@ -46,8 +46,8 @@ namespace Wikman.Synthesizer.Editor
         Slider m_LpFilterResonanceSlider;
         Slider m_HpFilterCutoffSlider;
         Slider m_HpFilterCutoffSweepSlider;
-        
-        [MenuItem("Window/Audio/Synthesizer")]
+
+        [MenuItem("Tools/Audio/Synthesizer")]
         static void Init()
         {
             var window = GetWindow(typeof(SynthEditor));
@@ -64,7 +64,13 @@ namespace Wikman.Synthesizer.Editor
 
         void LoadUxml()
         {
-            var visualTree = ResourceLoader.Load<VisualTreeAsset>("SynthWindow.uxml");
+            var treeAsset = "SynthWindow.uxml";
+            var visualTree = ResourceLoader.Load<VisualTreeAsset>(treeAsset);
+            if (visualTree == null)
+            {
+                Debug.LogError("Cannot find file: " + treeAsset);
+                return;
+            }
             var labelFromUxml = visualTree.Instantiate();
             rootVisualElement.Add(labelFromUxml);
 
@@ -85,50 +91,50 @@ namespace Wikman.Synthesizer.Editor
                 {
                     GenerateClip(EffectType.Pickup);
                     PlayClip(m_LatestClip);
-                };   
-            
+                };
+
             btn = rootVisualElement.Q<Button>("Laser");
             btn.clicked += () =>
                 {
                     GenerateClip(EffectType.Laser);
                     PlayClip(m_LatestClip);
-                }; 
-            
+                };
+
             btn = rootVisualElement.Q<Button>("Explosion");
             btn.clicked += () =>
                 {
                     GenerateClip(EffectType.Explosion);
                     PlayClip(m_LatestClip);
-                };          
-            
+                };
+
             btn = rootVisualElement.Q<Button>("Power up");
             btn.clicked += () =>
                 {
                     GenerateClip(EffectType.PowerUp);
                     PlayClip(m_LatestClip);
-                };       
-            
+                };
+
             btn = rootVisualElement.Q<Button>("Hit");
             btn.clicked += () =>
                 {
                     GenerateClip(EffectType.Hit);
                     PlayClip(m_LatestClip);
-                };  
-            
+                };
+
             btn = rootVisualElement.Q<Button>("Jump");
             btn.clicked += () =>
                 {
                     GenerateClip(EffectType.Jump);
                     PlayClip(m_LatestClip);
-                };             
-            
+                };
+
             btn = rootVisualElement.Q<Button>("Blip");
             btn.clicked += () =>
                 {
                     GenerateClip(EffectType.Blip);
                     PlayClip(m_LatestClip);
-                };             
-            
+                };
+
             btn = rootVisualElement.Q<Button>("Random");
             btn.clicked += () =>
                 {
@@ -142,18 +148,18 @@ namespace Wikman.Synthesizer.Editor
                     ModifyClip();
                     PlayClip(m_LatestClip);
                 };
-            
+
             btn = rootVisualElement.Q<Button>("PrintToConsole");
             btn.clicked += () =>
                 {
-                    if(m_LatestClip != null)
+                    if (m_LatestClip != null)
                         Debug.Log(m_LatestClip.parameters.ToString());
-                };            
-            
+                };
+
             btn = rootVisualElement.Q<Button>("ExportSound");
             btn.clicked += () =>
                 {
-                    if(m_LatestClip != null)
+                    if (m_LatestClip != null)
                         EditorUtilities.SaveClipToWav(m_LatestClip.clip);
                 };
 
@@ -174,7 +180,7 @@ namespace Wikman.Synthesizer.Editor
             {
                 m_WaveTypeIndex = m_WaveTypeDropdown.index;
             });
-            
+
             m_AttackTimeSlider = rootVisualElement.Q<Slider>("AttackTime");
             m_SustainTimeSlider = rootVisualElement.Q<Slider>("SustainTime");
             m_SustainPunchSlider = rootVisualElement.Q<Slider>("SustainPunch");
@@ -196,17 +202,17 @@ namespace Wikman.Synthesizer.Editor
             m_LpFilterCutoffSweepSlider = rootVisualElement.Q<Slider>("LpFilterCutoffSweep");
             m_LpFilterResonanceSlider = rootVisualElement.Q<Slider>("LpFilterResonance");
             m_HpFilterCutoffSlider = rootVisualElement.Q<Slider>("HpFilterCutoff");
-            m_HpFilterCutoffSweepSlider = rootVisualElement.Q<Slider>("HpFilterCutoffSweep");          
+            m_HpFilterCutoffSweepSlider = rootVisualElement.Q<Slider>("HpFilterCutoffSweep");
         }
 
         void GenerateClip(EffectType effectType)
         {
             if (m_ShouldRandomize)
             {
-                if(effectType != EffectType.None)
+                if (effectType != EffectType.None)
                     m_LatestClip = Synth.GenerateRandom(effectType);
                 else
-                    m_LatestClip = Synth.GenerateRandom();                
+                    m_LatestClip = Synth.GenerateRandom();
             }
             else
             {
@@ -302,7 +308,7 @@ namespace Wikman.Synthesizer.Editor
             m_LatestClip.parameters.lpFilterResonance = m_LpFilterResonanceSlider.value;
             m_LatestClip.parameters.hpFilterCutoff = m_HpFilterCutoffSlider.value;
             m_LatestClip.parameters.hpFilterCutoffSweep = m_HpFilterCutoffSweepSlider.value;
-            
+
             m_LatestClip = Synth.GenerateRandom(m_LatestClip.fxType, m_LatestClip.seed, m_LatestClip.parameters);
         }
 

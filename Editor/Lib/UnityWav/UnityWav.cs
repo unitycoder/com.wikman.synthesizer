@@ -19,7 +19,7 @@ using System.Text;
 using System.IO;
 using System;
 
-namespace Wikman.Synthesizer.UnityWav
+namespace com.unitycoder.sfxr.UnityWav
 {
 	internal class UnityWav
 	{

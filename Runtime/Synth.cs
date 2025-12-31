@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Wikman.Synthesizer.Sfxr;
-
 using Random = UnityEngine.Random;
 
-namespace Wikman.Synthesizer
+namespace com.unitycoder.sfxr
 {
     public enum EffectType
     {

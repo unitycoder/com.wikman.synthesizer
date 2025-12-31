@@ -24,7 +24,7 @@ using UnityEngine;
 
 using Random = UnityEngine.Random;
 
-namespace Wikman.Synthesizer.Sfxr
+namespace com.unitycoder.sfxr
 {
 	internal class SfxrGenerator
     {

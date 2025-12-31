@@ -1,5 +1,5 @@
 {
-    "name": "Wikman.Synthesizer.Runtime",
+    "name": "com.unitycoder.sfxr.Runtime",
     "rootNamespace": "",
     "references": [],
     "includePlatforms": [],
